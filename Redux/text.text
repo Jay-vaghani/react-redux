@@ -51,6 +51,23 @@ store.dispatch(buyIceCream())
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 function buyCake() {
     return {
         type: BUY_CAKE

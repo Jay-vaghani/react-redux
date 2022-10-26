@@ -1,101 +1,135 @@
-const BUY_CAKE = 'BUY_CAKE'
-const BUY_IceCream = 'BUY_IceCream'
 const redux = require('redux')
+const reduxLogger = require('redux-logger')
+
 const createStore = redux.createStore
 const combineReducer = redux.combineReducers
 
+const logger = reduxLogger.createLogger()
+const applyMiddleWare = redux.applyMiddleware
 
-// // (previousState, action) => newState
+const BUY_CAKE = 'BUY_CAKE'
+const BUY_IceCream = 'BUY_IceCream'
 
-// // const initialState = {
-// //     numOfCakes: 10,
-// //     numOfIceCream: 20
-// // }
+// (previousState, action) => newState
 
 
-// const initialCakeState = {
-//     numOfCakes: 10,
-// }
 
-// const initialIceCream = {
-//     numOfIceCream: 20
-// }
 
 // function buyCake() {
 //     return {
-//         type: BUY_CAKE,
+//         type: BUY_CAKE
 //     }
 // }
 
 // function buyIceCream() {
 //     return {
-//         type: BUY_IceCream,
+//         type: BUY_IceCream
 //     }
 // }
 
-// // const reducer = (state = initialState, action) => {
-// //     switch (action.type) {
-// //         case BUY_CAKE:
-// //             return {
-// //                 ...state,
-// //                 numOfCakes: state.numOfCakes - 1
-// //             }
-// //             break;
 
-// //         case BUY_IceCream:
-// //             return {
-// //                 ...state,
-// //                 numOfIceCream: state.numOfIceCream - 1
-// //             }
+// const initialState = {
+//     numOfCakes: 10,
+//     numOfIceCream: 20
+// }
 
-// //         default: return state
-// //             break;
-// //     }
-// // }
-
-// const IceCreamReducer = (state = initialIceCream, action) => {
-
-//     if (action.type = 'BUY_CAKE') {
+// const reducer = (state = initialState, action) => {
+//     if (action.type === 'BUY_CAKE') {
 //         return {
+//             ...state,
+//             numOfCakes: state.numOfCakes - 1
+//         }
+//     }
+//     else if (action.type === 'BUY_IceCream') {
+//         return {
+//             ...state,
 //             numOfIceCream: state.numOfIceCream - 1
 //         }
-//     } else {
-//         return {
-//             state
-//         }
+//     }
+//     else {
+//         return state
 //     }
 // }
 
-// const cakeReducer = (state = initialCakeState, action) => {
-//     switch (action.type) {
-//         case BUY_IceCream:
-//             return {
-//                 numOfCakes: state.numOfCakes - 1
-//             }
-//             break;
-//         default: return state
-//             break;
-//     }
-// }
+// const store = createStore(reducer, applyMiddleWare(logger))
 
-// rootReducer = combineReducer({
-//     cake: cakeReducer,
-//     iceCream: IceCreamReducer
-// })
+
+// // store.subscribe(() => console.log('Update State', store.getState()))
+
+
+// store.dispatch(buyCake())
+// store.dispatch(buyIceCream())
 
 
 
-// const store = createStore(rootReducer)
 
+
+
+
+
+
+
+
+
+
+
+
+function buyCake() {
+    return {
+        type: BUY_CAKE
+    }
+}
+
+function buyIceCream() {
+    return {
+        type: 'BUY_IceCream'
+    }
+}
+
+const initialCakeState = {
+    numOfCake: 10
+}
+
+const initialIceCreamState = {
+    numOfIceCream: 10
+}
+
+const cakeReducer = (state = initialCakeState, action) => {
+    if (action.type === 'BUY_CAKE') {
+        return {
+            numOfCake: state.numOfCake - 1
+        }
+    } else {
+        return state
+    }
+}
+
+
+const iceCreamReducer = (state = initialIceCreamState, action) => {
+    if (action.type === 'BUY_IceCream') {
+        return {
+            numOfIceCream: state.numOfIceCream - 1
+        }
+    } else {
+        return state
+    }
+}
+
+const rootReducer = combineReducer({
+    cake: cakeReducer,
+    iceCream: iceCreamReducer
+})
+
+const store = redux.createStore(rootReducer, applyMiddleWare(logger))
 
 // store.subscribe(() => console.log('Update State', store.getState()))
 
-// store.dispatch(buyCake())
-// store.dispatch(buyCake())
-// store.dispatch(buyCake())
-// store.dispatch(buyIceCream())
-// store.dispatch(buyIceCream())
-// store.dispatch(buyIceCream())
+store.dispatch(buyIceCream())
+store.dispatch(buyIceCream())
+store.dispatch(buyIceCream())
+store.dispatch(buyCake())
+store.dispatch(buyCake())
+store.dispatch(buyCake())
 
 
 
